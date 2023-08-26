@@ -14,7 +14,7 @@ const ConnectionUrl = process.env.MONGO_URL;
 
 async function connectToDatabase() {
   try {
-    await mongoose.connect(ConnectionUrl, {
+    await mongoose.connect("mongodb://localhost:27017/server", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -23,9 +23,9 @@ async function connectToDatabase() {
     console.error('Error connecting to MongoDB:', err);
   }
 }
-
+ 
 connectToDatabase();
-
+ 
 // MiddleWare
 app.use(express.json());
 app.use(helmet());
@@ -35,9 +35,9 @@ app.use("/api/auth",authRoute);
 app.use("/api/post",postRoute);
 
 app.get("/", (req, res) => {
-    res.send("Welcome to home");
+  res.send("Welcome to home");
 });
-  
+   
 app.get("/user", (req, res) => {
   res.send("Welcome to User Page");
 });
